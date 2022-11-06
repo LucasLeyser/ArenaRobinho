@@ -10,7 +10,12 @@ Saida Circuito
 Tip | R G B |
 
 Fita
-+
++ - Vcc fonte 12V
 A - R
 B - G
 C - B
+
+1 GND no Arduino
+1 na Fonte
+
+Vcc Fonte no + da Fita
