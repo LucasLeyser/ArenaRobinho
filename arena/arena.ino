@@ -55,21 +55,21 @@ void loop()
         RGB_color(0,255,0);         
         delay(COLOR_READ_TIME);     
         RGB_color(0,0,0);           
-        Serial.write('k');          // Done
+        Serial.write('k');      // Done
         break;
       case 'b':   // BLUE   
 		    Serial.write('k');			// Received
         RGB_color(0,0,255);         
         delay(COLOR_READ_TIME);     
         RGB_color(0,0,0);           
-        Serial.write('d');          // Done
+        Serial.write('d');      // Done
         break;
       case 'y':  // YELLOW 			
 		    Serial.write('k');			// Received
         RGB_color(255,255,0);       
         delay(COLOR_READ_TIME);     
         RGB_color(0,0,0);           
-        Serial.write('d');          // Done
+        Serial.write('d');      // Done
         break;
       case 'p':  // Botoes
 		    Serial.write('k');			// Received
@@ -87,12 +87,12 @@ void loop()
             loop = BUTTON_READ_TIME + 5;       
         }
         if (loop == BUTTON_READ_TIME)
-          button = 'n'; 			//Nenhum
+          button = 'n'; 			  //Nenhum
         Serial.write(button);		//Return
         break;
 		
 	    default:
-		    Serial.write('e'); //Erro
+		    Serial.write('e');     //Error, command unknown
 		    break;
     }
   }
