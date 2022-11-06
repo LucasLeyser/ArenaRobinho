@@ -99,7 +99,7 @@ void loop()
 
     while (ACK != 'k')
     {
-	    Serial.write("while 2");
+	    //Serial.write("while 2");
       if(Serial.available())
 	    {
 	      ACK = Serial.read();
