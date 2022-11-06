@@ -1,0 +1,16 @@
+Arduino
+2 - Red
+3 - Green
+4 - Blue
+
+Entrada do circuito
+RGB 2 Tip -> 1 Tip
+
+Saida Circuito
+Tip | R G B |
+
+Fita
++
+A - R
+B - G
+C - B

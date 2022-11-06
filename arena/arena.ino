@@ -17,8 +17,8 @@ void setup()
   pinMode(GREEN, OUTPUT); 
   pinMode(BLUE, OUTPUT); 
 
-  analogWrite(RED, 255);
-  analogWrite(GREEN, 0);
+  analogWrite(RED, 0); //blue
+  analogWrite(GREEN, 0); //red
   analogWrite(BLUE, 0);
 
   pinMode(RED_BUTTON, INPUT_PULLUP); // Botao 1
@@ -36,9 +36,10 @@ int Read_Buttons();
 // the loop function runs over and over again forever
 void loop() 
 {
-  char ACK = 'x';
+  char ACK = 'k';
   if(Serial.available()) 
   {
+    ACK = 'x';
     char data_rcvd = Serial.read();   // read one byte from serial buffer and save to data_rcvd
 	
     switch (data_rcvd)
@@ -95,16 +96,19 @@ void loop()
 		    Serial.write('e');     //Error, command unknown
 		    break;
     }
+
+    while (ACK != 'k')
+    {
+	    Serial.write("while 2");
+      if(Serial.available())
+	    {
+	      ACK = Serial.read();
+	    }
+    }
+    // Go to next command
   }
   
-  while (ACK != 'k')
-  {
-	  if(Serial.available())
-	  {
-	    ACK = Serial.read();
-	  }
-  }
-  // Go to next command
+
 }
 
 void RGB_color(int red_light_value, int green_light_value, int blue_light_value)
