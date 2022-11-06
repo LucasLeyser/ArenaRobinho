@@ -36,37 +36,43 @@ int Read_Buttons();
 // the loop function runs over and over again forever
 void loop() 
 {
+  char ACK = 'x';
   if(Serial.available()) 
   {
     char data_rcvd = Serial.read();   // read one byte from serial buffer and save to data_rcvd
-
+	
     switch (data_rcvd)
     {
-      case 'r':  // RED    
+      case 'r':  // RED 
+		    Serial.write('k');			// Received
         RGB_color(255,0,0);
         delay(COLOR_READ_TIME);
         RGB_color(0,0,0);
-        Serial.write('k');
+        Serial.write('d');			// Done
         break;
-      case 'g':  // GREEN    
-        RGB_color(0,255,0);
-        delay(COLOR_READ_TIME);
-        RGB_color(0,0,0);
-        Serial.write('k');
+      case 'g':  // GREEN   
+		    Serial.write('k');			// Received
+        RGB_color(0,255,0);         
+        delay(COLOR_READ_TIME);     
+        RGB_color(0,0,0);           
+        Serial.write('k');          // Done
         break;
-      case 'b':   // BLUE    
-        RGB_color(0,0,255);
-        delay(COLOR_READ_TIME);
-        RGB_color(0,0,0);
-        Serial.write('k');
+      case 'b':   // BLUE   
+		    Serial.write('k');			// Received
+        RGB_color(0,0,255);         
+        delay(COLOR_READ_TIME);     
+        RGB_color(0,0,0);           
+        Serial.write('d');          // Done
         break;
-      case 'y':  // YELLOW     
-        RGB_color(255,255,0);
-        delay(COLOR_READ_TIME);
-        RGB_color(0,0,0);
-        Serial.write('k');
+      case 'y':  // YELLOW 			
+		    Serial.write('k');			// Received
+        RGB_color(255,255,0);       
+        delay(COLOR_READ_TIME);     
+        RGB_color(0,0,0);           
+        Serial.write('d');          // Done
         break;
       case 'p':  // Botoes
+		    Serial.write('k');			// Received
         char button = 0;
         int loop = 0; 
         while (loop < BUTTON_READ_TIME)
@@ -78,14 +84,27 @@ void loop()
             delay(500); 
           }
           else
-            loop = BUTTON_READ_TIME+5;       
+            loop = BUTTON_READ_TIME + 5;       
         }
         if (loop == BUTTON_READ_TIME)
-          button = 'n';
-        Serial.write(button);
+          button = 'n'; 			//Nenhum
+        Serial.write(button);		//Return
         break;
+		
+	    default:
+		    Serial.write('e'); //Erro
+		    break;
     }
-  }                   // wait for a second
+  }
+  
+  while (ACK != 'k')
+  {
+	  if(Serial.available())
+	  {
+	    ACK = Serial.read();
+	  }
+  }
+  // Go to next command
 }
 
 void RGB_color(int red_light_value, int green_light_value, int blue_light_value)
