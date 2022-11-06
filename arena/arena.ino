@@ -41,39 +41,42 @@ void loop()
   {
     ACK = 'x';
     char data_rcvd = Serial.read();   // read one byte from serial buffer and save to data_rcvd
-	
     switch (data_rcvd)
     {
+      default:
+		    Serial.println('e');     //Error, command unknown
+        break;
+        
       case 'r':  // RED 
-		    Serial.write('k');			// Received
+		    Serial.println('k');			// Received
         RGB_color(255,0,0);
         delay(COLOR_READ_TIME);
         RGB_color(0,0,0);
-        Serial.write('d');			// Done
+        Serial.println('d');			// Done
         break;
       case 'g':  // GREEN   
-		    Serial.write('k');			// Received
+		    Serial.println('k');			// Received
         RGB_color(0,255,0);         
         delay(COLOR_READ_TIME);     
         RGB_color(0,0,0);           
-        Serial.write('k');      // Done
+        Serial.println('d');      // Done
         break;
       case 'b':   // BLUE   
-		    Serial.write('k');			// Received
+		    Serial.println('k');			// Received
         RGB_color(0,0,255);         
         delay(COLOR_READ_TIME);     
         RGB_color(0,0,0);           
-        Serial.write('d');      // Done
+        Serial.println('d');      // Done
         break;
       case 'y':  // YELLOW 			
-		    Serial.write('k');			// Received
+		    Serial.println('k');			// Received
         RGB_color(255,255,0);       
         delay(COLOR_READ_TIME);     
         RGB_color(0,0,0);           
-        Serial.write('d');      // Done
+        Serial.println('d');      // Done
         break;
       case 'p':  // Botoes
-		    Serial.write('k');			// Received
+		    Serial.println('k');			// Received
         char button = 0;
         int loop = 0; 
         while (loop < BUTTON_READ_TIME)
@@ -89,17 +92,12 @@ void loop()
         }
         if (loop == BUTTON_READ_TIME)
           button = 'n'; 			  //Nenhum
-        Serial.write(button);		//Return
+        Serial.println(button);		//Return
         break;
-		
-	    default:
-		    Serial.write('e');     //Error, command unknown
-		    break;
     }
 
     while (ACK != 'k')
     {
-	    //Serial.write("while 2");
       if(Serial.available())
 	    {
 	      ACK = Serial.read();
