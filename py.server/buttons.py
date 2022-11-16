@@ -1,30 +1,30 @@
 # buttons.py
-
 import sys
 import serial
 import time
 import string
 import random
 
-# make sure the 'COM#' is set according the Windows Device Manager
-ser = serial.Serial('COM3', 9600, timeout=1)
-time.sleep(2)
-sequencia_real = sys.argv[1]
-sequencia_lida = ""
+def buttons():
 
-for i in range(5):
+    # make sure the 'COM#' is set according the Windows Device Manager
+    ser = serial.Serial('COM5', 9600, timeout=1)
+    time.sleep(2)
+
     ser.write('p'.encode())
-    
-    resposta = ''
+
+    resposta = 'x'
     while resposta != 'k':
         resposta = ser.read()
+        resposta = str(resposta, encoding='utf-8')
         
-    resposta = ''
+    resposta = 'x'
     while resposta != 'r' and resposta != 'g' and resposta != 'b' and resposta != 'y' and resposta != 'n':
         resposta = ser.read()
-    
-    sequencia_lida = sequencia_lida + resposta
-#print(sequencia_real)
-print(sequencia_lida)
-#print(sequencia_lida == sequencia_real)
-ser.close()
+        resposta = str(resposta, encoding='utf-8')
+        
+    ser.close()
+    return resposta
+
+retorno = buttons()
+print (retorno)

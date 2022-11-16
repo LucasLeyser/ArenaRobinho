@@ -27,6 +27,8 @@ void setup()
   pinMode(YELLOW_BUTTON, INPUT_PULLUP); // Botao 4
 
   Serial.begin(9600);
+
+  pinMode(LED_BUILTIN, OUTPUT);
   
 }
 
@@ -41,6 +43,8 @@ void loop()
   {
     ACK = 'x';
     char data_rcvd = Serial.read();   // read one byte from serial buffer and save to data_rcvd
+    digitalWrite(LED_BUILTIN, HIGH);
+    delay(1000); 
     switch (data_rcvd)
     {
       //default:
@@ -48,11 +52,11 @@ void loop()
         //break;
         
       case 'r':  // RED 
-		    Serial.println('k');			// Received
+        Serial.print('k');			// Received
         RGB_color(255,0,0);
         delay(COLOR_READ_TIME);
         RGB_color(0,0,0);
-        Serial.println('d');			// Done
+        Serial.print('d');			// Done
         break;
       case 'g':  // GREEN   
 		    Serial.println('k');			// Received
@@ -95,17 +99,17 @@ void loop()
         Serial.println(button);		//Return
         break;
     }
-    Serial.flush();
-    while (ACK != 'k')
-     {
-     
+//    Serial.flush();
+//    while (ACK != 'k')
+//     {
+    
 
-	       ACK = Serial.read();
-	        Serial.println(ACK);		//Return
-          delay(500); 
+//	       ACK = Serial.read();
+//	        Serial.println(ACK);		//Return
+ //         delay(500); 
 
-      }
-
+//      }
+    digitalWrite(LED_BUILTIN, LOW);
     // Go to next command
   }
   
