@@ -43,9 +43,9 @@ void loop()
     char data_rcvd = Serial.read();   // read one byte from serial buffer and save to data_rcvd
     switch (data_rcvd)
     {
-      default:
-		    Serial.println('e');     //Error, command unknown
-        break;
+      //default:
+		    //Serial.println('e');     //Error, command unknown
+        //break;
         
       case 'r':  // RED 
 		    Serial.println('k');			// Received
@@ -95,14 +95,17 @@ void loop()
         Serial.println(button);		//Return
         break;
     }
-
+    Serial.flush();
     while (ACK != 'k')
-    {
-      if(Serial.available())
-	    {
-	      ACK = Serial.read();
-	    }
-    }
+     {
+     
+
+	       ACK = Serial.read();
+	        Serial.println(ACK);		//Return
+          delay(500); 
+
+      }
+
     // Go to next command
   }
   
