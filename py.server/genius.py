@@ -15,9 +15,9 @@ def main():
         #robinnho vai até o botão
         botoes = botoes + le_botao()
         
-    print(leds)
-    print(botoes)
-    print(leds == botoes)
+    #print(leds)
+    #print(botoes)
+    #print(leds == botoes)
     
 def sequencia_leds(tam):
     tamanho = tam
