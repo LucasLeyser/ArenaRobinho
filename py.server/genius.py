@@ -21,7 +21,7 @@ def main():
     
 def sequencia_leds(tam):
     tamanho = tam
-    ser = serial.Serial('COM5', 9600, timeout=1)
+    ser = serial.Serial('/dev/ttyACM0', 9600, timeout=1)
     time.sleep(2)
     cores = 'rgby'
     sequencia = ""
@@ -44,7 +44,7 @@ def sequencia_leds(tam):
     return sequencia
 
 def le_botao():
-    ser = serial.Serial('COM5', 9600, timeout=1)
+    ser = serial.Serial('/dev/ttyACM0', 9600, timeout=1)
     time.sleep(2)
 
     ser.write('p'.encode())
